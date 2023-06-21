@@ -7,8 +7,15 @@ interface ChildProps {
     setTodo: React.Dispatch<React.SetStateAction<string[]>>
     done: string[]
     setDone: React.Dispatch<React.SetStateAction<string[]>>
+    search: string
 }
-const TodoList: React.FC<ChildProps> = ({ todo, done, setTodo, setDone }) => {
+const TodoList: React.FC<ChildProps> = ({
+    todo,
+    done,
+    setTodo,
+    setDone,
+    search
+}) => {
     const handleClick1 = (key: number) => {
         const _pop = todo.splice(key, 1)
         done.push(_pop[0])
@@ -30,6 +37,7 @@ const TodoList: React.FC<ChildProps> = ({ todo, done, setTodo, setDone }) => {
                         todoType="To Do"
                         item={todo}
                         handleClick={handleClick1}
+                        search={search}
                     />
                     <TodoItem
                         todoType="Done"
@@ -37,6 +45,7 @@ const TodoList: React.FC<ChildProps> = ({ todo, done, setTodo, setDone }) => {
                         limit={3}
                         checked
                         handleClick={handleClick2}
+                        search={search}
                     />
                 </div>
             </Row>

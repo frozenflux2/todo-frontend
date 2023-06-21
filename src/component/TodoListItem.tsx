@@ -7,6 +7,7 @@ interface TodoItemProps {
     limit?: number
     checked?: boolean
     handleClick: (e: number) => any
+    search: string
 }
 
 const TodoItem: React.FC<TodoItemProps> = ({
@@ -14,14 +15,15 @@ const TodoItem: React.FC<TodoItemProps> = ({
     item,
     limit,
     checked,
-    handleClick
+    handleClick,
+    search
 }) => {
     return (
         <Space direction="vertical" style={{ width: 350, padding: 20 }}>
             <Divider>{todoType}</Divider>
             <Space direction="vertical">
-                {item?.slice(0, limit || item.length).map((el, key) => {
-                    return (
+                {item?.slice(0, limit || item.length).map((el, key) =>
+                    el.includes(search) ? (
                         <Checkbox
                             checked={checked}
                             key={key}
@@ -29,8 +31,10 @@ const TodoItem: React.FC<TodoItemProps> = ({
                         >
                             {el}
                         </Checkbox>
+                    ) : (
+                        <></>
                     )
-                })}
+                )}
             </Space>
         </Space>
     )

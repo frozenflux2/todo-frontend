@@ -3,11 +3,14 @@ import { Space, Input, Button, Row } from "antd"
 
 const { Search } = Input
 interface ChildProps {
+    search: string
     setTodo: React.Dispatch<React.SetStateAction<string[]>>
+    setSearch: React.Dispatch<React.SetStateAction<string>>
 }
-const Toolbox: React.FC<ChildProps> = ({ setTodo }) => {
-    const onSearch = (value: string) => console.log(value)
+const Toolbox: React.FC<ChildProps> = ({ search, setTodo, setSearch }) => {
+    const onSearch = (value: string) => setSearch(value)
     const [value, setValue] = useState("")
+    const [value2, setValue2] = useState("")
 
     return (
         <Row justify="space-around" style={{ padding: 20 }}>
@@ -36,6 +39,10 @@ const Toolbox: React.FC<ChildProps> = ({ setTodo }) => {
                 onSearch={onSearch}
                 enterButton
                 style={{ width: 304 }}
+                defaultValue={search}
+                value={value2}
+                allowClear
+                onChange={(e) => setValue2(e.target.value)}
             />
         </Row>
     )
